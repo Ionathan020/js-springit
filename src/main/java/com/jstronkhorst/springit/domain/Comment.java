@@ -11,7 +11,7 @@ import lombok.NonNull;
 @Entity
 @Data
 @NoArgsConstructor
-public class Comment {
+public class Comment extends Auditable {
 
     @Id
     @GeneratedValue

@@ -7,14 +7,13 @@ import jakarta.persistence.OneToMany;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Link {
+public class Link extends Auditable {
 
     @Id
     @GeneratedValue
