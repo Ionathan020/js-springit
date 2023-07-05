@@ -4,12 +4,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 @Entity
-@Data
+@RequiredArgsConstructor
+@Getter @Setter
+@ToString
 @NoArgsConstructor
 public class Comment extends Auditable {
 
@@ -20,5 +20,7 @@ public class Comment extends Auditable {
     private String body;
 
     @ManyToOne
+    @NonNull
     private Link link;
+
 }
