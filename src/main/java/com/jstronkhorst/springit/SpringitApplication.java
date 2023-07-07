@@ -17,4 +17,15 @@ public class SpringitApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringitApplication.class, args);
     }
+
+    @Bean
+    CommandLineRunner runner(LinkRepository linkRepository, CommentRepository commentRepository) {
+        return args -> {
+            Link link = new Link("This is the first posted link automatically created by the system.", "https://www.google.nl");
+            linkRepository.save(link);
+            Comment comment = new Comment("Let's spam the shit out of this site!", link);
+            commentRepository.save(comment);
+            link.addComment(comment);
+        };
+    }
 }
