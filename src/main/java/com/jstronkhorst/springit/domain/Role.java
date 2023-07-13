@@ -5,23 +5,25 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
+import java.util.Collection;
 
 @Entity
 @RequiredArgsConstructor
-@Getter @Setter
+@Getter
+@Setter
 @ToString
 @NoArgsConstructor
-public class Comment extends Auditable {
+public class Role {
 
     @Id
     @GeneratedValue
-    private long id;
-    @NonNull
-    private String body;
+    private Long id;
 
-    @ManyToOne
     @NonNull
-    private Link link;
+    private String name;
+
+    @ManyToMany(mappedBy = "roles")
+    private Collection<User> users;
 
 }
