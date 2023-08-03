@@ -8,9 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Entity
@@ -37,6 +35,12 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
 
+    @OneToMany(mappedBy = "user")
+    private List<Link> links = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Vote> votes = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -44,6 +48,22 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
+
+    public void addLink(Link link) {
+        links.add(link);
+    }
+
+    public void addLinks(List<Link> links) {
+        this.links.addAll(links);
+    }
+
+    public void addVote(Vote vote) {
+        votes.add(vote);
+    }
+
+    public void addVote(List<Vote> votes) {
+        this.votes.addAll(votes);
+    }
 
     public void addRole(Role role) {
         roles.add(role);

@@ -11,10 +11,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
+import java.util.*;
 
 @Component
 public class DatabaseLoader implements CommandLineRunner {
@@ -35,7 +32,8 @@ public class DatabaseLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
         //User and roles
-        addUsersAndRoles();
+        User master = addUsersAndRolesAndReturnMaster();
+
 
         Map<String, String> links = new HashMap<>();
         links.put("Securing Spring Boot APIs and SPAs with OAuth 2.0", "https://auth0.com/blog/securing-spring-boot-apis-and-spas-with-oauth2/?utm_source=reddit&utm_medium=sc&utm_campaign=springboot_spa_securing");
@@ -51,15 +49,17 @@ public class DatabaseLoader implements CommandLineRunner {
         links.put("File download example using Spring REST Controller", "https://www.jeejava.com/file-download-example-using-spring-rest-controller/");
 
         links.forEach((k, v) -> {
-            linkRepository.save(new Link(k, v));
-            // we will do something with comments later
+            Link link = new Link(k, v, master);
+            linkRepository.save(link);
+            master.addLink(link);
         });
+        userRepository.save(master);
 
         long linkCount = linkRepository.count();
         System.out.println("Number of links in the database: " + linkCount);
     }
 
-    private void addUsersAndRoles() {
+    private User addUsersAndRolesAndReturnMaster() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         String secret = "{bcrypt}" + encoder.encode("password");
 
@@ -79,6 +79,6 @@ public class DatabaseLoader implements CommandLineRunner {
         User master = new User("master@gmail.com",secret,true);
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
         userRepository.save(master);
-
+        return master;
     }
 }
