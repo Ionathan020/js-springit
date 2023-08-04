@@ -1,7 +1,7 @@
 package com.jstronkhorst.springit.security;
 
 import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.repository.UserRepository;
+import com.jstronkhorst.springit.service.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -11,15 +11,15 @@ import java.util.Optional;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {
-    private UserRepository userRepository;
+    private UserService userService;
 
-    public UserDetailServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UserDetailServiceImpl(UserService userService) {
+        this.userService = userService;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> user = userRepository.findByEmail(username);
+        Optional<User> user = userService.findByEmail(username);
         if (user.isEmpty()) {
             throw new UsernameNotFoundException(username);
         }

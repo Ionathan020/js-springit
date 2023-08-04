@@ -5,9 +5,9 @@ import com.jstronkhorst.springit.domain.Link;
 import com.jstronkhorst.springit.domain.Role;
 import com.jstronkhorst.springit.domain.User;
 import com.jstronkhorst.springit.repository.CommentRepository;
-import com.jstronkhorst.springit.repository.LinkRepository;
 import com.jstronkhorst.springit.repository.RoleRepository;
-import com.jstronkhorst.springit.repository.UserRepository;
+import com.jstronkhorst.springit.service.LinkService;
+import com.jstronkhorst.springit.service.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -18,15 +18,15 @@ import java.util.*;
 public class DatabaseLoader implements CommandLineRunner {
 
     private final RoleRepository roleRepository;
-    private final UserRepository userRepository;
-    private final LinkRepository linkRepository;
+    private final UserService userService;
+    private final LinkService linkService;
     private final CommentRepository commentRepository;
 
-    public DatabaseLoader(RoleRepository roleRepository, UserRepository userRepository,
-                          LinkRepository linkRepository, CommentRepository commentRepository) {
+    public DatabaseLoader(RoleRepository roleRepository, UserService userService,
+                          LinkService linkService, CommentRepository commentRepository) {
         this.roleRepository = roleRepository;
-        this.userRepository = userRepository;
-        this.linkRepository = linkRepository;
+        this.userService = userService;
+        this.linkService = linkService;
         this.commentRepository = commentRepository;
     }
 
@@ -34,7 +34,6 @@ public class DatabaseLoader implements CommandLineRunner {
     public void run(String... args) {
         //User and roles
         User master = addUsersAndRolesAndReturnMaster();
-
 
         Map<String, String> links = new HashMap<>();
         links.put("Securing Spring Boot APIs and SPAs with OAuth 2.0", "https://auth0.com/blog/securing-spring-boot-apis-and-spas-with-oauth2/?utm_source=reddit&utm_medium=sc&utm_campaign=springboot_spa_securing");
@@ -51,7 +50,7 @@ public class DatabaseLoader implements CommandLineRunner {
 
         links.forEach((k, v) -> {
             Link link = new Link(k, v, master);
-            linkRepository.save(link);
+            linkService.save(link);
             master.addLink(link);
             Comment spring = new Comment("Thank you for this link related to Spring Boot. I love it, great post!", link, master);
             Comment security = new Comment("I love that you're talking about Spring Security",link, master);
@@ -63,10 +62,7 @@ public class DatabaseLoader implements CommandLineRunner {
             }
             master.addComments(List.of(comments));
         });
-        userRepository.save(master);
-
-        long linkCount = linkRepository.count();
-        System.out.println("Number of links in the database: " + linkCount);
+        userService.save(master);
     }
 
     private User addUsersAndRolesAndReturnMaster() {
@@ -80,15 +76,15 @@ public class DatabaseLoader implements CommandLineRunner {
 
         User user = new User("user@gmail.com",secret,true);
         user.addRole(userRole);
-        userRepository.save(user);
+        userService.save(user);
 
         User admin = new User("admin@gmail.com",secret,true);
         admin.addRole(adminRole);
-        userRepository.save(admin);
+        userService.save(admin);
 
         User master = new User("master@gmail.com",secret,true);
         master.addRoles(new HashSet<>(Arrays.asList(userRole,adminRole)));
-        userRepository.save(master);
+        userService.save(master);
         return master;
     }
 }

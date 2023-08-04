@@ -3,9 +3,9 @@ package com.jstronkhorst.springit.controller;
 import com.jstronkhorst.springit.domain.Comment;
 import com.jstronkhorst.springit.domain.Link;
 import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.repository.CommentRepository;
-import com.jstronkhorst.springit.repository.LinkRepository;
-import com.jstronkhorst.springit.repository.UserRepository;
+import com.jstronkhorst.springit.service.CommentService;
+import com.jstronkhorst.springit.service.LinkService;
+import com.jstronkhorst.springit.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;
@@ -27,25 +27,25 @@ public class LinkController {
 
     private static final Logger logger = LoggerFactory.getLogger(LinkController.class);
 
-    private final LinkRepository linkRepository;
-    private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
+    private final LinkService linkService;
+    private final CommentService commentService;
+    private final UserService userService;
 
-    public LinkController(LinkRepository linkRepository, CommentRepository commentRepository, UserRepository userRepository) {
-        this.linkRepository = linkRepository;
-        this.commentRepository = commentRepository;
-        this.userRepository = userRepository;
+    public LinkController(LinkService linkService, CommentService commentService, UserService userService) {
+        this.linkService = linkService;
+        this.commentService = commentService;
+        this.userService = userService;
     }
 
     @GetMapping("/")
     public String list(Model model) {
-        model.addAttribute("links", linkRepository.findAll());
+        model.addAttribute("links", linkService.findAll());
         return "link/list";
     }
 
     @GetMapping("/link/{id}")
     public String read(@PathVariable Long id,Model model) {
-        Optional<Link> link = linkRepository.findById(id);
+        Optional<Link> link = linkService.findById(id);
         if( link.isPresent() ) {
             Link currentLink = link.get();
             Comment comment = new Comment();
@@ -72,7 +72,7 @@ public class LinkController {
             model.addAttribute("link", link);
             return "link/submit";
         } else {
-            linkRepository.save(link);
+            linkService.save(link);
             logger.info("Link {} is saved.", link.getTitle());
             redirectAttributes
                     .addAttribute("id", link.getId())
@@ -85,7 +85,7 @@ public class LinkController {
     @PostMapping("/link/comments")
     public String addComment(@Valid Comment comment, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<User> optionalUser = userRepository.findByEmail(auth.getName());
+        Optional<User> optionalUser = userService.findByEmail(auth.getName());
         if (optionalUser.isEmpty()) {
             return "redirect:/login";
         }
@@ -94,7 +94,7 @@ public class LinkController {
             logger.error("Something went wrong.");
         } else {
             logger.info("New Comment Saved!");
-            commentRepository.save(comment);
+            commentService.save(comment);
         }
         return "redirect:/link/" + comment.getLink().getId();
     }
