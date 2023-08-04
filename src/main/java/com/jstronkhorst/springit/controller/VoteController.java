@@ -41,7 +41,6 @@ public class VoteController {
             return voteCount;
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.info("Account name: {}", auth.getName());System.out.println(auth.getName());
         Optional<User> optionalUser = userRepository.findByEmail(auth.getName());
         if (optionalUser.isEmpty()) {
             return voteCount;

@@ -1,16 +1,20 @@
 package com.jstronkhorst.springit.domain;
 
+import com.jstronkhorst.springit.service.BeanUtil;
 import lombok.*;
+import org.ocpsoft.prettytime.PrettyTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 @Entity
 @RequiredArgsConstructor
 @Getter @Setter
-@ToString
 @NoArgsConstructor
 public class Comment extends Auditable {
 
@@ -24,4 +28,16 @@ public class Comment extends Auditable {
     @NonNull
     private Link link;
 
+    @ManyToOne
+    @NonNull
+    private User user;
+
+    public String getPrettyTime() {
+        PrettyTime pt = BeanUtil.getBean(PrettyTime.class);
+        return pt.format(convertToDateViaInstant(getCreatedDateTime()));
+    }
+
+    private Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date.from(dateToConvert.atZone(ZoneId.systemDefault()).toInstant());
+    }
 }

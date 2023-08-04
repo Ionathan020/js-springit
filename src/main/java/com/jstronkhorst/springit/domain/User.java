@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 @Entity
 @RequiredArgsConstructor
 @Getter @Setter
-@ToString
 @NoArgsConstructor
 public class User implements UserDetails {
 
@@ -41,6 +40,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user")
     private List<Vote> votes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments = new ArrayList<>();
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -61,8 +63,16 @@ public class User implements UserDetails {
         votes.add(vote);
     }
 
-    public void addVote(List<Vote> votes) {
+    public void addVotes(List<Vote> votes) {
         this.votes.addAll(votes);
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void addComments(List<Comment> comments) {
+        this.comments.addAll(comments);
     }
 
     public void addRole(Role role) {

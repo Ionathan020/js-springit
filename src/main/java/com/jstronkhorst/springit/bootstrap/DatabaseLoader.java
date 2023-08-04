@@ -1,5 +1,6 @@
 package com.jstronkhorst.springit.bootstrap;
 
+import com.jstronkhorst.springit.domain.Comment;
 import com.jstronkhorst.springit.domain.Link;
 import com.jstronkhorst.springit.domain.Role;
 import com.jstronkhorst.springit.domain.User;
@@ -52,6 +53,15 @@ public class DatabaseLoader implements CommandLineRunner {
             Link link = new Link(k, v, master);
             linkRepository.save(link);
             master.addLink(link);
+            Comment spring = new Comment("Thank you for this link related to Spring Boot. I love it, great post!", link, master);
+            Comment security = new Comment("I love that you're talking about Spring Security",link, master);
+            Comment pwa = new Comment("What is this Progressive Web App thing all about? PWAs sound really cool.",link, master);
+            Comment[] comments = {spring,security,pwa};
+            for(Comment comment : comments) {
+                commentRepository.save(comment);
+                link.addComment(comment);
+            }
+            master.addComments(List.of(comments));
         });
         userRepository.save(master);
 
