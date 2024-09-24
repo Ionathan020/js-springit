@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{layouts/main_layout :: head(title='Springit - Spring Boot Reddit Clone')}">
-</head>
+    <title></title></head>
 <body>
 <nav th:replace="~{layouts/main_layout :: nav}"></nav>
 <div th:replace="~{layouts/main_layout :: jumbotron}"></div>
@@ -39,7 +39,7 @@
     const allvotes = document.querySelectorAll(".upvote, .downvote");
     for(let i=0; i<allvotes.length; i++) {
         let className = allvotes[i].className;
-        allvotes[i].addEventListener('click', function (event) {
+        allvotes[i].addEventListener('click', function () {
             const direction = className === 'upvote' ? 1 : -1;
             const linkID = this.getAttribute("data-id");
             const voteSum = document.getElementById('votecount-' + linkID);

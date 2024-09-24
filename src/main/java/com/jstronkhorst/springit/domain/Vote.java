@@ -2,7 +2,7 @@ package com.jstronkhorst.springit.domain;
 
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @RequiredArgsConstructor
