@@ -1,6 +1,6 @@
 package com.jstronkhorst.springit.config;
 
-import com.jstronkhorst.springit.domain.User;
+import com.jstronkhorst.springit.user.User;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.core.context.SecurityContextHolder;
 

@@ -1,7 +1,5 @@
-package com.jstronkhorst.springit.service;
+package com.jstronkhorst.springit.user;
 
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

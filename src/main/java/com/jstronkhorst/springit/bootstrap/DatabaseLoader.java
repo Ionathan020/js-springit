@@ -1,13 +1,13 @@
 package com.jstronkhorst.springit.bootstrap;
 
-import com.jstronkhorst.springit.domain.Comment;
-import com.jstronkhorst.springit.domain.Link;
-import com.jstronkhorst.springit.domain.Role;
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.repository.CommentRepository;
-import com.jstronkhorst.springit.repository.RoleRepository;
-import com.jstronkhorst.springit.service.LinkService;
-import com.jstronkhorst.springit.service.UserService;
+import com.jstronkhorst.springit.comment.Comment;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.user.Role;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.comment.CommentRepository;
+import com.jstronkhorst.springit.user.RoleRepository;
+import com.jstronkhorst.springit.link.LinkService;
+import com.jstronkhorst.springit.user.UserService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;

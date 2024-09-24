@@ -1,5 +1,8 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.vote;
 
+import com.jstronkhorst.springit.config.Auditable;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.link.Link;
 import lombok.*;
 
 import jakarta.persistence.*;

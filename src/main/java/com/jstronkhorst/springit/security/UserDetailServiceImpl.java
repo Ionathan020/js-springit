@@ -1,7 +1,7 @@
 package com.jstronkhorst.springit.security;
 
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.service.UserService;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.user.UserService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

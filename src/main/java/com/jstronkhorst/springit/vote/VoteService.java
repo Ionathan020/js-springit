@@ -1,9 +1,7 @@
-package com.jstronkhorst.springit.service;
+package com.jstronkhorst.springit.vote;
 
-import com.jstronkhorst.springit.domain.Link;
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.domain.Vote;
-import com.jstronkhorst.springit.repository.VoteRepository;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.user.User;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

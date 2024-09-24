@@ -1,6 +1,9 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.comment;
 
-import com.jstronkhorst.springit.service.BeanUtil;
+import com.jstronkhorst.springit.config.Auditable;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.config.BeanUtil;
 import lombok.*;
 import org.ocpsoft.prettytime.PrettyTime;
 

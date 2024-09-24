@@ -1,7 +1,5 @@
-package com.jstronkhorst.springit.service;
+package com.jstronkhorst.springit.link;
 
-import com.jstronkhorst.springit.domain.Link;
-import com.jstronkhorst.springit.repository.LinkRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

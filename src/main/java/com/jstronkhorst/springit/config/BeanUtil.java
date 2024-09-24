@@ -1,4 +1,4 @@
-package com.jstronkhorst.springit.service;
+package com.jstronkhorst.springit.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

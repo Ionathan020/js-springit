@@ -1,4 +1,4 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.user;
 
 import lombok.*;
 

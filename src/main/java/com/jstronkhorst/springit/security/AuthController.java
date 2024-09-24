@@ -1,6 +1,5 @@
-package com.jstronkhorst.springit.controller;
+package com.jstronkhorst.springit.security;
 
-import com.jstronkhorst.springit.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 

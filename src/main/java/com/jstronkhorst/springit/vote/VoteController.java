@@ -1,11 +1,9 @@
-package com.jstronkhorst.springit.controller;
+package com.jstronkhorst.springit.vote;
 
-import com.jstronkhorst.springit.domain.Link;
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.domain.Vote;
-import com.jstronkhorst.springit.service.LinkService;
-import com.jstronkhorst.springit.service.UserService;
-import com.jstronkhorst.springit.service.VoteService;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.link.LinkService;
+import com.jstronkhorst.springit.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.annotation.Secured;

@@ -1,13 +1,11 @@
-package com.jstronkhorst.springit.repository;
+package com.jstronkhorst.springit.vote;
 
-import com.jstronkhorst.springit.domain.Link;
-import com.jstronkhorst.springit.domain.User;
-import com.jstronkhorst.springit.domain.Vote;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.user.User;
 import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
-import java.util.function.LongUnaryOperator;
 
 public interface VoteRepository extends JpaRepository<Vote, Long> {
     Optional<Vote> findByUserAndLink(@NonNull User user, @NonNull Link link);

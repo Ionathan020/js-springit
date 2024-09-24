@@ -1,6 +1,9 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.user;
 
 
+import com.jstronkhorst.springit.comment.Comment;
+import com.jstronkhorst.springit.link.Link;
+import com.jstronkhorst.springit.vote.Vote;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

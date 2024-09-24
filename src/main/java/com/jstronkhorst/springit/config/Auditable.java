@@ -1,4 +1,4 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.config;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

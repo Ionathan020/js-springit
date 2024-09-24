@@ -1,6 +1,10 @@
-package com.jstronkhorst.springit.domain;
+package com.jstronkhorst.springit.link;
 
-import com.jstronkhorst.springit.service.BeanUtil;
+import com.jstronkhorst.springit.config.Auditable;
+import com.jstronkhorst.springit.comment.Comment;
+import com.jstronkhorst.springit.user.User;
+import com.jstronkhorst.springit.vote.Vote;
+import com.jstronkhorst.springit.config.BeanUtil;
 import lombok.*;
 import org.hibernate.validator.constraints.URL;
 import org.ocpsoft.prettytime.PrettyTime;

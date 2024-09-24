@@ -1,7 +1,5 @@
-package com.jstronkhorst.springit.service;
+package com.jstronkhorst.springit.comment;
 
-import com.jstronkhorst.springit.domain.Comment;
-import com.jstronkhorst.springit.repository.CommentRepository;
 import org.springframework.stereotype.Service;
 
 @Service
