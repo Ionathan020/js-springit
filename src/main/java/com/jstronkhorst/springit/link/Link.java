@@ -1,7 +1,7 @@
 package com.jstronkhorst.springit.link;
 
-import com.jstronkhorst.springit.config.Auditable;
 import com.jstronkhorst.springit.comment.Comment;
+import com.jstronkhorst.springit.config.Auditable;
 import com.jstronkhorst.springit.user.User;
 import com.jstronkhorst.springit.vote.Vote;
 import com.jstronkhorst.springit.config.BeanUtil;

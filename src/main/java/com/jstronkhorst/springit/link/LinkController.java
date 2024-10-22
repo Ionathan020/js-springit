@@ -1,8 +1,8 @@
 package com.jstronkhorst.springit.link;
 
 import com.jstronkhorst.springit.comment.Comment;
-import com.jstronkhorst.springit.user.User;
 import com.jstronkhorst.springit.comment.CommentService;
+import com.jstronkhorst.springit.user.User;
 import com.jstronkhorst.springit.user.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,9 +46,6 @@ public class LinkController {
         Optional<Link> link = linkService.findById(id);
         if( link.isPresent() ) {
             Link currentLink = link.get();
-            Comment comment = new Comment();
-            comment.setLink(currentLink);
-            model.addAttribute("comment",comment);
             model.addAttribute("link",currentLink);
             model.addAttribute("success", model.containsAttribute("success"));
             return "link/view";
@@ -81,7 +78,7 @@ public class LinkController {
 
     @Secured({"ROLE_USER"})
     @PostMapping("/link/comments")
-    public String addComment(@Valid Comment comment, BindingResult bindingResult, Model model, RedirectAttributes redirectAttributes) {
+    public String addComment(@Valid Comment comment, BindingResult bindingResult) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<User> optionalUser = userService.findByEmail(auth.getName());
         if (optionalUser.isEmpty()) {

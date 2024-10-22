@@ -1,9 +1,6 @@
 package com.jstronkhorst.springit.user;
 
 
-import com.jstronkhorst.springit.comment.Comment;
-import com.jstronkhorst.springit.link.Link;
-import com.jstronkhorst.springit.vote.Vote;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -37,15 +34,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private Boolean enabled;
 
-    @OneToMany(mappedBy = "user")
-    private List<Link> links = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Vote> votes = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user")
-    private List<Comment> comments = new ArrayList<>();
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
@@ -53,30 +41,6 @@ public class User implements UserDetails {
             inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id")
     )
     private Set<Role> roles = new HashSet<>();
-
-    public void addLink(Link link) {
-        links.add(link);
-    }
-
-    public void addLinks(List<Link> links) {
-        this.links.addAll(links);
-    }
-
-    public void addVote(Vote vote) {
-        votes.add(vote);
-    }
-
-    public void addVotes(List<Vote> votes) {
-        this.votes.addAll(votes);
-    }
-
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    public void addComments(List<Comment> comments) {
-        this.comments.addAll(comments);
-    }
 
     public void addRole(Role role) {
         roles.add(role);

@@ -51,16 +51,15 @@ public class DatabaseLoader implements CommandLineRunner {
         links.forEach((k, v) -> {
             Link link = new Link(k, v, master);
             linkService.save(link);
-            master.addLink(link);
             Comment spring = new Comment("Thank you for this link related to Spring Boot. I love it, great post!", link, master);
             Comment security = new Comment("I love that you're talking about Spring Security",link, master);
             Comment pwa = new Comment("What is this Progressive Web App thing all about? PWAs sound really cool.",link, master);
             Comment[] comments = {spring,security,pwa};
             for(Comment comment : comments) {
+                comment.setUser(master);
                 commentRepository.save(comment);
                 link.addComment(comment);
             }
-            master.addComments(List.of(comments));
         });
         userService.save(master);
     }

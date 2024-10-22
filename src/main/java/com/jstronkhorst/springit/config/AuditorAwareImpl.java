@@ -12,6 +12,6 @@ public class AuditorAwareImpl implements AuditorAware<String> {
         if (SecurityContextHolder.getContext().getAuthentication() == null) {
             return Optional.of("master@gmail.com");
         }
-        return Optional.of(((User) SecurityContextHolder.getContext().getAuthentication().getPrincipal()).getEmail());
+        return Optional.of(SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString());
     }
 }
